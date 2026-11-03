@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Տոմսերի Ամրագրում | Ռեալ Դիզայն</title>
+  <link href="https://fonts.googleapis.com/css2?family=Armata&family=Noto+Sans+Armenian:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Noto Sans Armenian', sans-serif;
+    }
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+
+    /* HEADER / NAVBAR */
+    header {
+      background-color: rgba(18, 18, 18, 0.95);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid #282828;
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 24px;
+    }
+    .logo-box {
+      display: flex;
+      align-items: center;
+    }
+    .logo-badge {
+      background-color: #e50914;
+      color: #fff;
+      font-weight: 900;
+      font-size: 14px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      transform: rotate(-3deg);
+      display: inline-block;
+      font-family: sans-serif;
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+    }
+    nav a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    nav a.active, nav a:hover {
+      color: #fff;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    /* HERO SECTION WITH USER'S IMAGE */
+    .hero-section {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      background-image: url('IMG_7574_e79441.jpeg');
+      background-size: cover;
+      background-position: center top;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 40px 20px 30px;
+    }
+    .hero-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(18,18,18,0.95) 100%);
+      z-index: 1;
+    }
+    .hero-title {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      font-size: 38px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      line-height: 1.2;
+      color: #ffffff;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+      margin-top: 10px;
+    }
+    
+    /* SEARCH BAR IN HERO */
+    .hero-search-container {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 850px;
+      margin-bottom: 20px;
+    }
+    .search-pill {
+      background: rgba(40, 40, 40, 0.75);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      padding: 6px 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    }
+    .search-input-group {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      padding: 0 10px;
+    }
+    .search-input-group i {
+      color: #aaa;
+      margin-right: 10px;
+      font-size: 18px;
+    }
+    .search-input-group input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-size: 15px;
+      width: 100%;
+    }
+    .search-divider {
+      width: 1px;
+      height: 28px;
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    .search-btn-option {
+      background: transparent;
+      border: none;
+      color: #fff;
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .search-btn-option i {
+      color: #aaa;
+    }
+
+    /* SECTION CONTAINERS */
+    .content-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+    .section-header {
+      font-size: 26px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 24px;
+    }
+
+    /* FEATURED CARDS GRID */
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 50px;
+    }
+    .event-card {
+      background-color: #262626;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .event-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    }
+    .card-img-wrapper {
+      position: relative;
+      width: 100%;
+      height: 280px;
+      overflow: hidden;
+    }
+    .card-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .countdown-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(4px);
+      color: #111;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1.1;
+    }
+    .countdown-badge span.days {
+      color: #e50914;
+      font-size: 16px;
+    }
+    .card-content {
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .category-badge {
+      align-self: flex-start;
+      background-color: #e50914;
+      color: #fff;
+      padding: 4px 14px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .event-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .event-location {
+      font-size: 13px;
+      color: #aaa;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .event-price {
+      font-size: 13px;
+      color: #ccc;
+      margin-top: 4px;
+    }
+
+    /* FILTERS BAR */
+    .filter-bar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .filter-dropdown {
+      background-color: #404040;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    /* UPCOMING EVENTS LIST */
+    .upcoming-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background-color: #4a4a4a;
+      padding: 24px;
+      border-radius: 16px;
+    }
+    .upcoming-item {
+      display: flex;
+      align-items: center;
+      background-color: #383838;
+      border-radius: 12px;
+      padding: 12px 20px;
+      justify-content: space-between;
+      transition: background 0.2s;
+    }
+    .upcoming-item:hover {
+      background-color: #424242;
+    }
+    .item-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .item-thumb {
+      width: 70px;
+      height: 70px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+    .item-date {
+      text-align: center;
+      min-width: 60px;
+    }
+    .item-date .month-day {
+      font-size: 14px;
+      font-weight: 600;
+      color: #ccc;
+    }
+    .item-date .day-num {
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
+    }
+    .item-date .week-day {
+      font-size: 12px;
+      color: #aaa;
+    }
+    .item-details {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .item-details .title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .item-details .venue {
+      font-size: 13px;
+      color: #bbb;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .item-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .item-price {
+      font-size: 13px;
+      color: #ddd;
+    }
+    .btn-buy {
+      background-color: #e50914;
+      color: #fff;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background-color 0.2s;
+    }
+    .btn-buy:hover {
+      background-color: #ff0f1f;
+    }
+
+    /* AI AGENT FLOATING BUTTON & DRAWER */
+    .ai-agent-trigger {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: linear-gradient(135deg, #e50914, #990000);
+      color: #fff;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 20px rgba(229, 9, 20, 0.5);
+      cursor: pointer;
+      z-index: 1000;
+      transition: transform 0.3s;
+    }
+    .ai-agent-trigger:hover {
+      transform: scale(1.1);
+    }
+    .ai-chat-window {
+      position: fixed;
+      bottom: 95px;
+      right: 24px;
+      width: 380px;
+      height: 500px;
+      background-color: #1e1e1e;
+      border: 1px solid #333;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      display: none;
+      flex-direction: column;
+      z-index: 1000;
+      overflow: hidden;
+    }
+    .ai-chat-window.active {
+      display: flex;
+    }
+    .ai-chat-header {
+      background-color: #282828;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #333;
+    }
+    .ai-chat-header .title {
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #fff;
+    }
+    .ai-chat-close {
+      background: none;
+      border: none;
+      color: #aaa;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    .ai-chat-messages {
+      flex: 1;
+      padding: 16px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .msg {
+      max-width: 80%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    .msg.bot {
+      background-color: #2e2e2e;
+      color: #fff;
+      align-self: flex-start;
+      border-bottom-left-radius: 2px;
+    }
+    .msg.user {
+      background-color: #e50914;
+      color: #fff;
+      align-self: flex-end;
+      border-bottom-right-radius: 2px;
+    }
+    .ai-chat-input-area {
+      padding: 12px;
+      background-color: #262626;
+      display: flex;
+      gap: 8px;
+    }
+    .ai-chat-input-area input {
+      flex: 1;
+      background-color: #1a1a1a;
+      border: 1px solid #333;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 20px;
+      outline: none;
+    }
+    .ai-chat-input-area button {
+      background-color: #e50914;
+      color: #fff;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER NAVBAR -->
+  <header>
+    <div class="nav-container">
+      <div class="logo-box">
+        <span class="logo-badge">.am</span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#" class="active">Գլխավոր</a></li>
+          <li><a href="#">Կինո</a></li>
+          <li><a href="#">Թատրոն</a></li>
+          <li><a href="#">Օպերա և բալետ</a></li>
+          <li><a href="#">Համերգ</a></li>
+          <li><a href="#">Ակումբ և փաբ</a></li>
+        </ul>
+      </nav>
+      <i class="fa-solid fa-bars" style="color: #fff; font-size: 20px; cursor: pointer;"></i>
+    </div>
+  </header>
+
+  <!-- HERO SECTION WITH USER'S IMAGE BACKGROUND -->
+  <section class="hero-section">
+    <div class="hero-overlay"></div>
+    <h1 class="hero-title">ՔՈ ԱՆՄՈՌԱՆԱԼԻ ՕՐԸ<br>ՍԿՍՎՈՒՄ Է ԱՅՍՏԵՂ</h1>
+
+    <div class="hero-search-container">
+      <div class="search-pill">
+        <div class="search-input-group">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="....">
+        </div>
+        <div class="search-divider"></div>
+        <button class="search-btn-option">
+          <i class="fa-regular fa-calendar"></i>
+          Երբ
+        </button>
+        <div class="search-divider"></div>
+        <button class="search-btn-option">
+          <i class="fa-solid fa-location-dot"></i>
+          Որտեղ
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="content-container">
+
+    <!-- FEATURED SECTION -->
+    <h2 class="section-header">ԸՆՏՐՎԱԾ ՄԻՋՈՑԱՌՈՒՄՆԵՐ</h2>
+    
+    <div class="featured-grid">
+      <!-- CARD 1 -->
+      <div class="event-card">
+        <div class="card-img-wrapper">
+          <img src="IMG_7575_e79063.jpg" alt="Մի գդալ սեր">
+          <div class="countdown-badge">
+            <span>Մնաց</span>
+            <span class="days">05</span>
+            <span>օր</span>
+          </div>
+        </div>
+        <div class="card-content">
+          <span class="category-badge">Կինո</span>
+          <h3 class="event-title">Մի գդալ սեր</h3>
+          <div class="event-location">
+            <i class="fa-solid fa-location-dot"></i>
+            Dalma Garden Mall
+          </div>
+          <div class="event-price">Սկսած՝ 1500 դրամից</div>
+        </div>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="event-card">
+        <div class="card-img-wrapper">
+          <img src="IMG_7576_e79063.jpeg" alt="25-րդ ժամը">
+          <div class="countdown-badge">
+            <span>Մնաց</span>
+            <span class="days">12</span>
+            <span>օր</span>
+          </div>
+        </div>
+        <div class="card-content">
+          <span class="category-badge">Թատրոն</span>
+          <h3 class="event-title">25-րդ ժամը</h3>
+          <div class="event-location">
+            <i class="fa-solid fa-location-dot"></i>
+            Ս. Սարգսյանի անվան դրամատիկական թատրոն
+          </div>
+          <div class="event-price">Սկսած՝ 4000 դրամից</div>
+        </div>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="event-card">
+        <div class="card-img-wrapper">
+          <img src="IMG_7577_e79063.jpg" alt="Գայանե">
+          <div class="countdown-badge">
+            <span>Մնաց</span>
+            <span class="days">20</span>
+            <span>օր</span>
+          </div>
+        </div>
+        <div class="card-content">
+          <span class="category-badge">Օպերա</span>
+          <h3 class="event-title">Գայանե</h3>
+          <div class="event-location">
+            <i class="fa-solid fa-location-dot"></i>
+            Ա. Սպենդիարյանի անվան օպերա
+          </div>
+          <div class="event-price">Սկսած՝ 5000 դրամից</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UPCOMING EVENTS SECTION -->
+    <h2 class="section-header">ՄՈՏԱԿԱ ՄԻՋՈՑԱՌՈՒՄՆԵՐ</h2>
+
+    <div class="filter-bar">
+      <select class="filter-dropdown">
+        <option>Կատեգորիա v</option>
+      </select>
+      <select class="filter-dropdown">
+        <option>Վայր v</option>
+      </select>
+      <select class="filter-dropdown">
+        <option>Գին v</option>
+      </select>
+      <select class="filter-dropdown">
+        <option>Լեզու v</option>
+      </select>
+    </div>
+
+    <div class="upcoming-list">
+      <!-- ITEM 1 -->
+      <div class="upcoming-item">
+        <div class="item-left">
+          <img src="IMG_7578_e79063.jpeg" class="item-thumb" alt="Чужая мама">
+          <div class="item-date">
+            <div class="month-day">Նոյ</div>
+            <div class="day-num">22</div>
+            <div class="week-day">ուրբ</div>
+          </div>
+          <div class="item-details">
+            <div class="title">Чужая мама</div>
+            <div class="venue">
+              <i class="fa-solid fa-location-dot"></i> KinoPark (Երևան Մոլ)
+            </div>
+          </div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">Սկսած՝ 2000 դրամից</div>
+          <button class="btn-buy">Տոմսեր &gt;</button>
+        </div>
+      </div>
+
+      <!-- ITEM 2 -->
+      <div class="upcoming-item">
+        <div class="item-left">
+          <img src="IMG_7579_e79063.jpeg" class="item-thumb" alt="Բլեֆ">
+          <div class="item-date">
+            <div class="month-day">Դեկտ</div>
+            <div class="day-num">12</div>
+            <div class="week-day">շբթ</div>
+          </div>
+          <div class="item-details">
+            <div class="title">Բլեֆ</div>
+            <div class="venue">
+              <i class="fa-solid fa-location-dot"></i> Բոհեմ թատրոն
+            </div>
+          </div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">Սկսած՝ 2500 դրամից</div>
+          <button class="btn-buy">Տոմսեր &gt;</button>
+        </div>
+      </div>
+
+      <!-- ITEM 3 -->
+      <div class="upcoming-item">
+        <div class="item-left">
+          <img src="IMG_7580_e79063.jpeg" class="item-thumb" alt="Project LA">
+          <div class="item-date">
+            <div class="month-day">Դեկտ</div>
+            <div class="day-num">30</div>
+            <div class="week-day">չորեք</div>
+          </div>
+          <div class="item-details">
+            <div class="title">Project LA</div>
+            <div class="venue">
+              <i class="fa-solid fa-location-dot"></i> Park Bridge
+            </div>
+          </div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">Սկսած՝ 15000 դրամից</div>
+          <button class="btn-buy">Տոմսեր &gt;</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- AI AGENT FLOATING BUTTON AND CHAT WINDOW -->
+  <div class="ai-agent-trigger" id="aiTrigger">
+    <i class="fa-solid fa-robot" style="font-size: 24px;"></i>
+  </div>
+
+  <div class="ai-chat-window" id="aiWindow">
+    <div class="ai-chat-header">
+      <div class="title">
+        <i class="fa-solid fa-sparkles" style="color: #e50914;"></i> AI Օգնական
+      </div>
+      <button class="ai-chat-close" id="aiClose">&times;</button>
+    </div>
+    <div class="ai-chat-messages" id="chatMessages">
+      <div class="msg bot">
+        Ողջույն: Ես Ձեր AI Օգնականն եմ: Ինչպե՞ս կարող եմ օգնել Ձեզ ընտրել միջոցառում կամ ամրագրել տոմսեր:
+      </div>
+    </div>
+    <div class="ai-chat-input-area">
+      <input type="text" id="chatInput" placeholder="Գրեք հաղորդագրություն...">
+      <button id="sendBtn"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  <script>
+    // AI Chat Togglable Window
+    const aiTrigger = document.getElementById('aiTrigger');
+    const aiWindow = document.getElementById('aiWindow');
+    const aiClose = document.getElementById('aiClose');
+    const sendBtn = document.getElementById('sendBtn');
+    const chatInput = document.getElementById('chatInput');
+    const chatMessages = document.getElementById('chatMessages');
+
+    aiTrigger.addEventListener('click', () => {
+      aiWindow.classList.toggle('active');
+    });
+
+    aiClose.addEventListener('click', () => {
+      aiWindow.classList.remove('active');
+    });
+
+    sendBtn.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+
+    function sendMessage() {
+      const text = chatInput.value.trim();
+      if (!text) return;
+
+      // Add user message
+      const userMsg = document.createElement('div');
+      userMsg.className = 'msg user';
+      userMsg.textContent = text;
+      chatMessages.appendChild(userMsg);
+      chatInput.value = '';
+
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+      // Simulated AI Bot response
+      setTimeout(() => {
+        const botMsg = document.createElement('div');
+        botMsg.className = 'msg bot';
+        
+        const lower = text.toLowerCase();
+        if(lower.includes('կինո') || lower.includes('ֆիլմ')) {
+          botMsg.textContent = 'Կինոյի սիրահարների համար այս պահին առաջարկում ենք «Մի գդալ սեր» (Dalma Garden Mall) և «Чужая мама» (KinoPark) ֆիլմերը:';
+        } else if(lower.includes('թատրոն')) {
+          botMsg.textContent = 'Թատրոնի համար ունենք «25-րդ ժամը» (Դրամատիկական թատրոն) և «Բլեֆ» ներկայացումը (Բոհեմ թատրոն):';
+        } else if(lower.includes('տոմս') || lower.includes('գնում')) {
+          botMsg.textContent = 'Տոմս ամրագրելու համար սեղմեք համապատասխան միջոցառման աջ կողմում գտնվող «Տոմսեր >» կարմիր կոճակը:';
+        } else {
+          botMsg.textContent = 'Մենք ունենք բազմաթիվ միջոցառումներ թատրոնում, կինոյում և օպերայում: Ո՞ր ժանրն է Ձեզ հետաքրքրում:';
+        }
+
+        chatMessages.appendChild(botMsg);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }, 700);
+    }
+  </script>
+</body>
+</html>
